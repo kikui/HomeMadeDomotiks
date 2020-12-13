@@ -3,16 +3,14 @@ var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 var config = require("../../config");
 
-exports.create = async (req, res) => {
+exports.create = function(req, res) {
     var salt = bcrypt.genSaltSync(10);
     var hasPassword = bcrypt.hashSync(req.body.password, salt);
-
-    try {
-        var user = User.createUser(req.body.email, req.body.pseudo, hasPassword);
+    User.createUser(req.body.email, req.body.pseudo, hasPassword).then((user) => {
         res.send(user);
-    } catch {
+    }).catch((err) => {
         res.status(500).send(err);
-    }
+    })
 };
 
 exports.login = function(req, res) {
