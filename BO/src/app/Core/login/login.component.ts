@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-//import { AuthService } from '../../core/api/auth.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 //import { saveToken } from '../../shared/utils';
 import { environment } from '../../../environments/environment';
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
     selector: 'app-login',
@@ -23,8 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     private rememberMeSubscription: Subscription;
 
-    //private authService: AuthService
-    constructor(private fb: FormBuilder,
+    constructor(private fb: FormBuilder, private authService: AuthService,
         private router: Router, private route: ActivatedRoute) {
         this.loginForm = this.fb.group({
             login: [null, Validators.required],
@@ -34,23 +33,23 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/sheets';
-/*         this.rememberMeSubscription = this.authService.loginData.subscribe((data: FormGroup) => {
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/infos';
+        this.rememberMeSubscription = this.authService.loginData.subscribe((data: FormGroup) => {
             if (data) {
                 this.login(data);
             }
         }, error => console.error(error));
-        this.authService.rememberMe(); */
+        this.authService.rememberMe();
     }
 
-/*     login(loginForm: FormGroup) {
+    login(loginForm: FormGroup) {
         this.error = '';
         if (loginForm.valid) {
             if (loginForm.value['rememberMe'] == true) {
-                this.authService.rememberMe(loginForm);
+                //this.authService.rememberMe(loginForm);
             }
 
-            this.authService.login(loginForm.value.login, loginForm.value.password).subscribe((data: Token) => {
+            /* this.authService.login(loginForm.value.login, loginForm.value.password).subscribe((data: Token) => {
                 saveToken(data);
 
                 if (this.authService.isNew()) {
@@ -61,9 +60,9 @@ export class LoginComponent implements OnInit, OnDestroy {
             }, error => {
                 console.error('An error occurred', error);
                 this.error = 'Veuillez vérifier vos informations de connexion';
-            })
+            }) */
         }
-    } */
+    }
 
     ngOnDestroy() {
         this.rememberMeSubscription.unsubscribe();
