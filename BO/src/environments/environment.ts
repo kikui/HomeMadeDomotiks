@@ -2,8 +2,13 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+
+//TODO link with package.json version
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'localhost:8080',
+  apiVersion: '/api/v1',
+  version: "1.0.0"
 };
 
 /*

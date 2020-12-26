@@ -1,0 +1,44 @@
+<div>
+    <div class="login-background"></div>
+    <div style="position: relative;">
+        <!-- <form [formGroup]="loginForm" novalidate>
+            <div class="image-login logo"></div>
+            <div class="row">
+                <div class="col w-100 outline-input-theme">
+                    <mat-form-field class="outline-full-width" appearance="outline" color="white">
+                        <input matInput formControlName="login" placeholder="Login" class="input-login-margin"
+                            type="email">
+                        <mat-error *ngIf="loginForm.controls['login'].hasError('required')">
+                            L'adresse email est <strong>obligatoire</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col w-100 outline-input-theme">
+                    <mat-form-field class="outline-full-width" appearance="outline">
+                        <input matInput formControlName="password" type="email" class="input-login-margin"
+                            [type]="hide ? 'password' : 'text'" placeholder="Mot de passe">
+                        <button mat-icon-button matSuffix type="button" (click)="hide = !hide"
+                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+                            Le mot de passe est <strong>obligatoire</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div *ngIf="error" class="errors"><span class="errors-text">{{error}}</span></div>
+            <div class="col login-cb-theme">
+                <mat-checkbox labelPosition="before" class="text-remember-me" formControlName="rememberMe">Se souvenir
+                    de moi
+                </mat-checkbox>
+                <button class="valid-btn" type="submit" (click)="login(loginForm)" [disabled]="!loginForm.valid">
+                    CONNEXION
+                </button>
+                <span class="version">Version : {{appVersion}}</span>
+            </div>
+        </form> -->
+    </div>
+</div>

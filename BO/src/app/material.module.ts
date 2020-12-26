@@ -2,7 +2,6 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { NgModule } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
@@ -29,7 +28,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     CdkTableModule,
     CdkTreeModule,
     MatFormFieldModule,
-    MatProgressSpinnerModule,
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
