@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-//import { saveToken } from '../../shared/utils';
 import { environment } from '../../../environments/environment';
 import { AuthService } from 'src/app/Services/auth.service';
+import { saveToken, TokenUser } from 'src/app/models/token.model';
 
 @Component({
     selector: 'app-login',
@@ -34,12 +34,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/infos';
-        this.rememberMeSubscription = this.authService.loginData.subscribe((data: FormGroup) => {
+        /* this.rememberMeSubscription = this.authService.loginData.subscribe((data: FormGroup) => {
             if (data) {
                 this.login(data);
             }
         }, error => console.error(error));
-        this.authService.rememberMe();
+        this.authService.rememberMe(); */
     }
 
     login(loginForm: FormGroup) {
@@ -49,23 +49,17 @@ export class LoginComponent implements OnInit, OnDestroy {
                 //this.authService.rememberMe(loginForm);
             }
 
-            /* this.authService.login(loginForm.value.login, loginForm.value.password).subscribe((data: Token) => {
-                saveToken(data);
-
-                if (this.authService.isNew()) {
-                    this.router.navigate(['/new-pwd']);
-                } else {
-                    this.router.navigate([this.returnUrl]);
-                }
+            this.authService.login(loginForm.value.login, loginForm.value.password).subscribe((data: TokenUser) => {
+                saveToken(data.token);
+                this.router.navigate([this.returnUrl]);
             }, error => {
                 console.error('An error occurred', error);
                 this.error = 'Veuillez vérifier vos informations de connexion';
-            }) */
+            })
         }
     }
 
     ngOnDestroy() {
         this.rememberMeSubscription.unsubscribe();
     }
-
 }
