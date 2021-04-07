@@ -16,7 +16,11 @@ mongoose.connect('mongodb://localhost:27017/api', {
 
 //-----------------------------------------------------------------RoutesSetup
 const userRoute = require('./src/routes/user.routes.js');
-app.use('/api/user', userRoute)
+app.use('/api/v1/user', function (req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    userRoute(req, res)
+})
 
 app.use(function (req, res, next) {
     let err = new Error('Not Found')

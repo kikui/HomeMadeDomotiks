@@ -6,7 +6,7 @@
 //TODO link with package.json version
 export const environment = {
   production: false,
-  apiUrl: 'localhost:8080',
+  apiUrl: 'http://localhost:7000',
   apiVersion: '/api/v1',
   version: "1.0.0"
 };

@@ -1,7 +1,7 @@
 import { User } from "./user.model";
 
 export interface Token {
-    idUser: string;
+    id: string;
     isAdmin: boolean;
     expiresAt: number;
 }
@@ -16,5 +16,5 @@ export function saveToken(token: string) {
 }
 
 export function getToken(): string {
-    return JSON.parse(sessionStorage.getItem('token'));
+    return sessionStorage.getItem('token') || null;
 }

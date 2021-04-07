@@ -11,6 +11,7 @@ import { saveToken, TokenUser } from 'src/app/models/token.model';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit, OnDestroy {
 
     appVersion = environment.version;
@@ -34,21 +35,21 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/infos';
-        /* this.rememberMeSubscription = this.authService.loginData.subscribe((data: FormGroup) => {
+        this.rememberMeSubscription = this.authService.loginData.subscribe((data: FormGroup) => {
             if (data) {
+                this.loginForm = data
                 this.login(data);
             }
         }, error => console.error(error));
-        this.authService.rememberMe(); */
+        this.authService.rememberMe();
     }
 
     login(loginForm: FormGroup) {
         this.error = '';
         if (loginForm.valid) {
-            if (loginForm.value['rememberMe'] == true) {
-                //this.authService.rememberMe(loginForm);
+            if (loginForm.value['rememberMe'] == true || loginForm.value['rememberMe'] == "true") {
+                this.authService.rememberMe(loginForm);
             }
-
             this.authService.login(loginForm.value.login, loginForm.value.password).subscribe((data: TokenUser) => {
                 saveToken(data.token);
                 this.router.navigate([this.returnUrl]);

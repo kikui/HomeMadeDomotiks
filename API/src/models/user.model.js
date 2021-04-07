@@ -47,12 +47,12 @@ User.findAll = () => {
 
 User.findUserByEmail = (email) => {
     return new Promise((resolve, reject) => {
-        UserModel.findOne({ email: email }, function (err, usersData) {
+        UserModel.findOne({ email: email.toString() }, function (err, usersData) {
             console.log("User[findUserByEmail]")
             if (err) { throw err; }
             if (usersData != undefined) {
                 console.log("User found!")
-                resolve(userMapper(usersData))
+                resolve(usersData)
             } else {
                 console.log("No user found with email: " + email)
                 reject()

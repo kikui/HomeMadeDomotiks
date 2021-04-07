@@ -1,5 +1,6 @@
 const config = require("../../config");
 const jwt = require("jsonwebtoken");
+const moment = require("moment")
 
 exports.loggedIn = function (req, res, next) {
     let token = req.header('Authorization');
@@ -11,6 +12,9 @@ exports.loggedIn = function (req, res, next) {
             token = token.slice(7, token.length).trimLeft();
         }
         const verified = jwt.verify(token, config.TOKEN_SECRET);
+        if (!moment().isBefore(verified.expiresAt)) {
+            return res.status(401).send("Unauthorized!");
+        }
         if (verified.isAdmin === false) {
             let req_url = req.baseUrl + req.route.path;
             if (req_url.includes("user/:id") && parseInt(req.params.id) !== verified.id) {
@@ -21,6 +25,7 @@ exports.loggedIn = function (req, res, next) {
         next();
     }
     catch (err) {
+        console.log(err)
         res.status(400).send("Invalid Token");
     }
 }

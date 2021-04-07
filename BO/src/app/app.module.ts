@@ -10,11 +10,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './Services/auth.service';
+import { UsersService } from './Services/users.service';
+import { InfoServerComponent } from './Core/infoServer/infoServer.component.';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    InfoServerComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +31,9 @@ import { AuthService } from './Services/auth.service';
     CommonModule,
   ],
   providers: [
+    AuthGuard,
     AuthService,
+    UsersService
   ],
   bootstrap: [AppComponent]
 })
